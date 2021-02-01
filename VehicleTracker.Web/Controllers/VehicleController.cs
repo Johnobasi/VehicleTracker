@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -81,7 +82,8 @@ namespace VehicleTracker.Web.Controllers
      
     
     [HttpPost("getPosition")]
-    public async Task<ActionResult> Get(VehiclePositionDateDto request)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Get(VehiclePositionDateDto request)
     {
         VehicleResponseDto model = null;
         try

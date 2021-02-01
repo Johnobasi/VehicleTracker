@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using VehicleTracker.Core.Entities;
 using VehicleTracker.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
+using VehicleTracker.Infrastructure.RolesManager;
 
 namespace VehicleTracker.Web
 {
@@ -60,8 +61,9 @@ namespace VehicleTracker.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RoleManager<IdentityRole> roleManager)
         {
+            RolesData.SeedRoles(roleManager);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

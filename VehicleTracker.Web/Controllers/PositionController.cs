@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -30,6 +31,7 @@ namespace VehicleTracker.Web.Controllers
             _vehicleRepository  = vehicleRepository;
         }
         [HttpPost("addposition")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Post(PositionRequestDto request)
         {
             try
@@ -55,6 +57,7 @@ namespace VehicleTracker.Web.Controllers
             return CreatedAtAction(nameof(Post), new BaseResponse<PositionRequestDto> { Body = request, Code= "200",  IsSuccessful = true, Message ="position enquiry sucessfully"});
         }
         [HttpGet("getposition/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Get(int request)
         {
             PositionResponseDto positionResponseDto = null;
